@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Product Name:</h1>
+    <h1 id="nee">Loading...</h1>
+    <div id="neww"></div>
+
+    <script>
+        // 1. The function to grab data
+       
+        function getData() {
+            fetch('https://api-new-5t5g.onrender.com/api/v1/products')
+                .then(res => res.json())
+                .then(data => {
+                     let rr = document.getElementById("neww");
+                    // 2. Access the name (Checking if it's in a 'products' array or direct)
+                    const myProduct = " "+data[0].description;
+                    
+                    let cnt = data;
+                    cnt.forEach((p)=>{
+                         let newH1 = document.createElement("h1")
+                         let newp1 = document.createElement("p");
+                         let newp2 = document.createElement("p");
+                         newH1.innerText = p.name;
+                         newp1.innerText = p.description;
+                         newp2.innerText = p.price;
+
+                         rr.appendChild(newp1);
+                         rr.appendChild(newp2);
+                         rr.appendChild(newH1);
+                    })
+                     document.getElementById("nee").innerText = data[0].name;
+                     
+                    
+                })
+                .catch(err => {
+                    document.getElementById("nee").innerText = "Error loading data";
+                    console.error(err);
+                });
+
+        }
+        
+       
+        getData();
+       
+        
+    </script>
+</body>
+</html>
